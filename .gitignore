@@ -3,3 +3,7 @@ __pycache__/
 *.pyc
 .env
 .DS_Store
+# V.A.N.T.A. private memory databases
+*.db
+*.db-shm
+*.db-wal
