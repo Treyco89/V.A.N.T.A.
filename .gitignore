@@ -7,3 +7,9 @@ __pycache__/
 *.db
 *.db-shm
 *.db-wal
+*.wav
+# V.A.N.T.A. private audio recordings
+*.wav
+*.mp3
+*.m4a
+*.flac

@@ -2,6 +2,10 @@ import os
 from memory import create_memory_table, save_memory, load_memories, list_memories, delete_memory
 from dotenv import load_dotenv  
 from openai import OpenAI
+from voice import speak
+from listener import record_audio
+from transcriber import transcribe_audio
+
 load_dotenv()  # Load environment variables from .env file
 api_key = os.getenv("OPENAI_API_KEY")  # Get the API key from environment variables
 if not api_key:
@@ -19,6 +23,12 @@ print("Type 'exit' to shut me down.")
 conversation_history = []  # Initialize an empty list to store conversation history
 while True:
     user_input = input("You: ")
+
+    if user_input.strip().lower() == "voice":
+        audio_file = record_audio()
+        user_input = transcribe_audio(audio_file)
+        print(f"You (voice): {user_input}")
+
     if user_input.lower() == "exit":
         print("V.A.N.T.A. is shutting down. Goodbye!")
         break
@@ -89,3 +99,4 @@ while True:
         )
         conversation_history.append({"role": "assistant", "content": response.output_text}) 
         print(f"V.A.N.T.A.: {response.output_text}")
+        speak(response.output_text)
